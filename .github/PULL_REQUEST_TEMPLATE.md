@@ -19,7 +19,7 @@
 
 See https://github.com/rhd-gitops-example/docs
 
-[ ] Updated
+* [ ] Updated
 
 **Which issue(s) this PR fixes**:
 
