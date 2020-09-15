@@ -46,7 +46,7 @@ bin:
 
 .PHONY: install
 install:
-	go install ./cmd/gitops-cli/gitops.go
+	go install -v -ldflags=$(LD_FLAGS) cmd/gitops-cli/gitops.go
 
 .PHONY: test
 test:
