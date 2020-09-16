@@ -18,7 +18,7 @@ func NewCmd(name, fullName string) *cobra.Command {
 		Short: "Get version",
 		Long:  "Get command version",
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Printf("Version: %s\n", Version)
+			fmt.Printf("gitops version %s\n", Version)
 		},
 	}
 }
