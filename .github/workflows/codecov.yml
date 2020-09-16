@@ -1,34 +1,37 @@
-name: workflow for Codecov
+name: codecov
 on: [push]
 jobs:
-  run:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    env:
-      OS: ${{ matrix.os }}
-      PYTHON: '3.7'
+
+  codecov:
+    name: codecov
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Setup Python
-      uses: actions/setup-python@master
-      with:
-        python-version: 3.7
-    - name: Generate coverage report
-      run: |
-        pip install pytest
-        pip install pytest-cov
-        pytest --cov=./ --cov-report=xml
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
-        files: ./coverage1.xml,./coverage2.xml
-        directory: ./coverage/reports/
-        flags: unittests
-        env_vars: OS,PYTHON
-        name: codecov-umbrella
-        fail_ci_if_error: true
-        path_to_write_report: ./coverage/codecov_report.gz
+
+      - name: Set up Go 1.12
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.12
+        id: go
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+
+      - name: Get dependencies
+        run: |
+          go get -v -t -d ./...
+          if [ -f Gopkg.toml ]; then
+              curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+              dep ensure
+          fi
+
+      - name: Generate coverage report
+        run: |
+          go test `go list ./... | grep -v examples` -coverprofile=coverage.txt -covermode=atomic
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v1.0.2
+        with:
+          token: {{your codecov token, can be found at https://codecov.io/gh/<github_username>/<repo>/settings/badge}}
+          file: ./coverage.txt
+          flags: unittests
+          name: codecov-umbrella
