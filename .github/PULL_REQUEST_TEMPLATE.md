@@ -1,28 +1,9 @@
-**What type of PR is this?**
-> Uncomment only one ` /kind` line, and delete the rest.
-> For example, `> /kind bug` would simply become: `/kind bug`
+Checklist:
 
-> /kind api-change
-> /kind bug
-> /kind cleanup
-> /kind deprecation
-> /kind design
-> /kind failing-test
-> /kind feature
-> /kind flake
-> /kind code-refactoring
-
-
-**What does this PR do / why we need it**:
-
-**Have you updated the necessary documentation?**
-
-See https://github.com/rhd-gitops-example/docs
-
-* [ ] Updated
-
-**Which issue(s) this PR fixes**:
-
-Fixes #?
-
-**How to test changes / Special notes to the reviewer**:
+* [ ] Either (a) I've created an [enhancement proposal](https://github.com/argoproj/argo-cd/issues/new/choose) and discussed it with the community, (b) this is a bug fix, or (c) this does not need to be in the release notes.
+* [ ] The title of the PR states what changed and the related issues number (used for the release note).
+* [ ] I've updated both the CLI and UI to expose my feature, or I plan to submit a second PR with them.
+* [ ] Does this PR require documentation updates?
+* [ ] I've updated documentation as required by this PR.
+* [ ] Optional. My organization is added to USERS.md.
+* [ ] I've signed the CLA and my build is green ([troubleshooting builds](https://argoproj.github.io/argo-cd/developer-guide/ci/)). 
